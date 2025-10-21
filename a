@@ -1,0 +1,81 @@
+[33mcommit 577f1963bc836ffada8e34e3b54371bde4f39cdd[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmemeroutes[m[33m, [m[1;31morigin/memeroutes[m[33m)[m
+Merge: 3fb46a9 c209f26
+Author: Thilina Dewmina <thilinadewmina7@gmail.com>
+Date:   Tue Oct 21 20:51:52 2025 +0530
+
+    meme post methode
+
+[33mcommit c209f26e95abbacde9f430bc495bf27981f42f7a[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Merge: 1dc9bd1 bc8cbc7
+Author: thethilina <thilinadewmina7@gmail.com>
+Date:   Tue Oct 21 19:22:58 2025 +0530
+
+    Merge pull request #1 from thethilina/uvindu
+    
+    Uvindu
+
+[33mcommit bc8cbc70dd6d09b144f98e091c7e4ccbabf337ff[m[33m ([m[1;31morigin/uvindu[m[33m)[m
+Author: Uvindu Eshwarage <uvindu.nethmina30@gmail.com>
+Date:   Tue Oct 21 18:58:18 2025 +0530
+
+    battle model implementation
+
+[33mcommit acbd6bff73bf30b0200db576866bb27a46fbdac5[m
+Author: Uvindu Eshwarage <uvindu.nethmina30@gmail.com>
+Date:   Tue Oct 21 18:36:51 2025 +0530
+
+    Successfully created battle request, battle, report user, report meme models
+
+[33mcommit 3fb46a9858d31d74511b4a57384035ddf5780ca5[m
+Author: Thilina Dewmina <thilinadewmina7@gmail.com>
+Date:   Tue Oct 21 16:04:29 2025 +0530
+
+    meme routes 1
+
+[33mcommit 1dc9bd18f11b4ea59a3b872bd0d2c278c757bae6[m[33m ([m[1;31morigin/userroutes[m[33m, [m[1;31morigin/dev[m[33m)[m
+Author: Thilina Dewmina <thilinadewmina7@gmail.com>
+Date:   Tue Oct 21 14:15:42 2025 +0530
+
+    user routs
+
+[33mcommit 429bf4f39ebeaf276d9b44bdd41fa7a413d0a5d1[m
+Author: Thilina Dewmina <thilinadewmina7@gmail.com>
+Date:   Mon Oct 20 20:50:06 2025 +0530
+
+    finished models
+
+[33mcommit 37708521c877dfd141237feb697e04f89a406a33[m
+Author: Thilina Dewmina <thilinadewmina7@gmail.com>
+Date:   Mon Oct 20 19:09:28 2025 +0530
+
+    final
+
+[33mcommit c68915cc83e09ed52d4ffe837b9150d4a26fdd83[m
+Author: Thilina Dewmina <thilinadewmina7@gmail.com>
+Date:   Mon Oct 20 19:07:03 2025 +0530
+
+    idk
+
+[33mcommit 404580ea17e9ee6974738e6de01bce9de7b06572[m
+Author: Thilina Dewmina <thilinadewmina7@gmail.com>
+Date:   Mon Oct 20 19:06:32 2025 +0530
+
+    data base implement-
+
+[33mcommit c96a34b2e121735194cee7cdffd2e4108effce51[m
+Author: Thilina Dewmina <thilinadewmina7@gmail.com>
+Date:   Mon Oct 20 18:10:24 2025 +0530
+
+    Initial commit from Create Next App
+
+[33mcommit 65da11160def5288a6dc3eaa366a0b4f91e3b4d2[m
+Author: thethilina <thilinadewmina7@gmail.com>
+Date:   Mon Oct 20 18:14:54 2025 +0530
+
+    Delete README.md
+
+[33mcommit 91d23b42dffcb684d953c5ce78e71686009cc56b[m
+Author: thethilina <thilinadewmina7@gmail.com>
+Date:   Mon Oct 20 17:50:13 2025 +0530
+
+    Initial commit

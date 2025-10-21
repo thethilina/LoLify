@@ -62,3 +62,39 @@ return new NextResponse(JSON.stringify({message:"Meme posted successfully!" , me
 
 
 }
+
+export const GET = async (request : Request) =>{
+
+
+try{
+
+const {searchParams} = new URL(request.url);
+const  page : any = parseInt(searchParams.get('page') || "1");
+const  limit : any = parseInt(searchParams.get('limit') || "10");    
+
+
+
+await connect();
+
+const  skip = (page - 1) * limit;
+
+const memes = await Meme.find().skip(skip).limit(limit);
+return new NextResponse(JSON.stringify(memes) , {status:200})
+
+
+}catch(e:any){
+
+    return new NextResponse("Error in fetching memes" +e.message , {status:500});
+
+}
+
+
+
+}
+
+
+
+
+
+
+
