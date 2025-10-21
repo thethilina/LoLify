@@ -8,7 +8,7 @@ import { Types } from "mongoose";
 export const GET = async (request : Request , context : {params :any} )=> {
 
 
-const searchText = await context.params.search;
+const searchText =  context.params.search;
 
 
 
