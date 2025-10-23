@@ -9,7 +9,7 @@ export const GET = async (request: Request, context: { params: any }) => {
   const searchText = context.params?.search;
 
   try {
-    if (!searchText || searchText.trim() === "") {
+    if (!searchText) {
       return new NextResponse(
         JSON.stringify({ message: "Search text shouldn't be empty" }),
         { status: 400 }
