@@ -5,8 +5,8 @@ const memeSchema = new Schema (
 
     memetitle  : {type:String  , required : true },
     taglines : [{type: String }],
-    likecount: {type: Number , required: true},
-    dislikecount: {type: Number , required: true},
+    likecount: [{type: mongoose.Schema.Types.ObjectId , ref: "User" } ],
+    dislikecount: [{type: mongoose.Schema.Types.ObjectId , ref: "User" } ],
     memeimg :{type:String  , required : true },
     userid :{type: mongoose.Schema.Types.ObjectId , ref: "User" ,required : true  } 
 
