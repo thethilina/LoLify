@@ -48,9 +48,10 @@ if(!user){
 }
 
 const alreadyLiked = meme.likecount.includes(userId);
+const alreadyDisLiked = meme.dislikecount.includes(userId);
 
-if (alreadyLiked) {
-    return new NextResponse(JSON.stringify({message:"Already Liked"}) , {status:400})
+if (alreadyLiked || alreadyDisLiked) {
+    return new NextResponse(JSON.stringify({message:"Already Reacted"}) , {status:400})
 }
 
 

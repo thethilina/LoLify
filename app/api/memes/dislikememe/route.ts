@@ -47,11 +47,13 @@ if(!user){
     return new NextResponse(JSON.stringify({message:"user not found"}) , {status:404})
 }
 
-const alreadyLiked = meme.dislikecount.includes(userId);
+const alreadyLiked = meme.likecount.includes(userId);
+const alreadyDisLiked = meme.dislikecount.includes(userId);
 
-if (alreadyLiked) {
-    return new NextResponse(JSON.stringify({message:"Already DisLiked"}) , {status:400})
+if (alreadyLiked || alreadyDisLiked) {
+    return new NextResponse(JSON.stringify({message:"Already Reacted"}) , {status:400})
 }
+
 
 
 const updatedmeme = await Meme.findByIdAndUpdate(
