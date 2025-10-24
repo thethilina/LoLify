@@ -18,6 +18,6 @@ const frequstSchema = new Schema (
 
 )
 
-const Frequest = models.Comment || model('Frequest' , frequstSchema );
+const Frequest = models.Frequest || model('Frequest' , frequstSchema );
 
 export default Frequest;
