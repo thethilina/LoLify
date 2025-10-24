@@ -195,7 +195,7 @@ if(!Types.ObjectId.isValid(memeId)){
 
 await connect();
 
-const deletedmeme = await User.findByIdAndDelete(memeId);
+const deletedmeme = await Meme.findByIdAndDelete(memeId);
 
 if (!deletedmeme) {
       return new NextResponse(JSON.stringify({ message: "Meme not found" }), {
