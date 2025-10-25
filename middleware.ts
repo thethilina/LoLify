@@ -23,6 +23,6 @@ console.log("Current time:", Date.now() / 1000);
 }
 
 export const config = {
-  matcher: ["/api/comments/:path*", "/api/users/:path*" , "/api/memes/:path*" , "/api/friend_request/:path*" ], 
+  matcher: ["/api/comments/protected/:path*", "/api/users/protected/:path*" , "/api/memes/protected/:path*" , "/api/friend_request/:path*" ], 
    runtime: "nodejs",
 };
