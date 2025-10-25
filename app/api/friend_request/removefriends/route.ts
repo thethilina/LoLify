@@ -8,9 +8,11 @@ import { Types } from "mongoose";
 export const PATCH = async (request : Request) => {
 
 try{
-    const {searchParams} = new URL(request.url);
+    
+const {searchParams} = new URL(request.url);
 const userId =  searchParams.get("userId");
 const usertoremoveId = searchParams.get("usertoremoveId");
+const loggeduserid = request.headers.get("loggeduserid")
 
 if (!userId) {
       return new NextResponse(
@@ -46,6 +48,12 @@ const user = await User.findById(userId);
 if(!user){
     return new NextResponse(JSON.stringify({message:"user not found"}) , {status:404})
 }
+
+if(user._id.toString() !== loggeduserid){
+ return new NextResponse('why the fuck u are trying to access another users ' , {status:404})
+}
+
+
 
 const usertoremove = await User.findById(usertoremoveId);
 

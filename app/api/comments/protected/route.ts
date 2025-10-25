@@ -14,7 +14,6 @@ try{
 
 const {searchParams} =  new URL(request.url);
 const memeId = searchParams.get("memeId");
-const userId = searchParams.get("userId");
 const loggeduserid = request.headers.get("loggeduserid")
 
 
@@ -25,43 +24,57 @@ if(!loggeduserid){
 }
 
 
-if(userId !== loggeduserid){
- return new NextResponse('why the fuck u are trying to access another users ' , {status:404})
-}
 
-if(!memeId || !userId){
+if(!memeId ){
 
   return new NextResponse('Meme id not found' , {status:400})
 
 }
 
-if(!mongoose.Types.ObjectId.isValid(memeId) || !mongoose.Types.ObjectId.isValid(userId)){
+if(!mongoose.Types.ObjectId.isValid(memeId) ){
 
-   return new NextResponse('Meme id or User id is not valid' , {status:400})
+   return new NextResponse('Meme id  is not valid' , {status:400})
 }
 
 
 await connect();
 
 const meme = await Meme.findById(memeId);
-const user = await User.findById(userId);
+
 
 if(!meme ){
 
  return new NextResponse('Meme  not found' , {status:400})
 }
 
-if(!user ){
-
- return new NextResponse('User  not found' , {status:400})
-}
 
 
 const body = await request.json();
+const {userid} = body;
+
+
+
 
 if(!body ){
 
  return new NextResponse('Body  not found' , {status:404})
+}
+
+
+
+if(!userid || userid === ""){
+return new NextResponse('user id not found' , {status:404})
+
+}
+
+
+if(!mongoose.Types.ObjectId.isValid(userid) ){
+
+   return new NextResponse('userid  is not valid' , {status:400})
+}
+
+if(userid !== loggeduserid){
+ return new NextResponse('why the fuck u are trying to access another users ' , {status:404})
 }
 
 
@@ -92,34 +105,45 @@ try{
 
 const {searchParams} = new URL(request.url);
 const commentId = searchParams.get("commentId");
-const userId = searchParams.get("userId");
+const loggeduserid = request.headers.get("loggeduserid")
 
-if(!commentId || !userId){
 
-  return new NextResponse('comment id or user id not found' , {status:404})
+if(!loggeduserid){
+
+   return new NextResponse('missing id from cookies' , {status:404})
 
 }
 
-if(!mongoose.Types.ObjectId.isValid(commentId) || !mongoose.Types.ObjectId.isValid(userId)){
 
-   return new NextResponse('comment id or User id is not valid' , {status:404})
+
+
+if(!commentId ){
+
+  return new NextResponse('comment id  not found' , {status:404})
+
+}
+
+if(!mongoose.Types.ObjectId.isValid(commentId) ){
+
+   return new NextResponse('comment id is not valid' , {status:404})
 }
 
 
 await connect();
 
 const comment = await Comment.findById(commentId);
-const user = await User.findById(userId);
+
+if(comment.userid.toString() !== loggeduserid){
+ return new NextResponse('why the fuck u are trying to access another users ' , {status:404})
+}
+
+
 
 if(!comment){
 
  return new NextResponse('Meme  not found' , {status:400})
 }
 
-if(!user ){
-
- return new NextResponse('User  not found' , {status:400})
-}
 
 
 const body = await request.json();
@@ -158,6 +182,17 @@ try{
 const {searchParams} = new URL(request.url);
 const commentId = searchParams.get("commentId");
 
+const loggeduserid = request.headers.get("loggeduserid")
+
+
+if(!loggeduserid){
+
+   return new NextResponse('missing id from cookies' , {status:404})
+
+}
+
+
+
 
 if(!commentId ){
 
@@ -174,6 +209,10 @@ if(!mongoose.Types.ObjectId.isValid(commentId) ){
 await connect();
 
 const comment = await Comment.findById(commentId);
+
+if(comment.userid.toString() !== loggeduserid){
+ return new NextResponse('why the fuck u are trying to access another users ' , {status:404})
+}
 
 
 if(!comment){

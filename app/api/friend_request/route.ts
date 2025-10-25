@@ -13,6 +13,9 @@ try{
 
 const {searchParams} = new URL(request.url);
 const userId = searchParams.get("userId");
+const loggeduserid = request.headers.get("loggeduserid")
+
+
 
 if (!userId) {
       return new NextResponse(
@@ -26,6 +29,12 @@ if(!Types.ObjectId.isValid(userId)){
 
     return new NextResponse(JSON.stringify({message : 'Invalide user id' } ) ,{status : 400})
 }
+
+
+if(userId !== loggeduserid){
+ return new NextResponse('why the fuck u are trying to access another users ' , {status:404})
+}
+
 
 await connect();
 
@@ -57,6 +66,7 @@ try{
 const {searchParams} = new URL(request.url);
 const byuserId = searchParams.get("byuserId");
 const touserId = searchParams.get("touserId")
+const loggeduserid = request.headers.get("loggeduserid")
 
 if (!byuserId) {
       return new NextResponse(
@@ -71,6 +81,12 @@ if(!Types.ObjectId.isValid(byuserId)){
     return new NextResponse(JSON.stringify({message : 'Invalide byuser id' } ) ,{status : 400})
 }
 
+if(byuserId !== loggeduserid){
+ return new NextResponse('why the fuck u are trying to access another users ' , {status:404})
+}
+
+
+
 if (!touserId) {
       return new NextResponse(
         JSON.stringify({ message: "missing touserId " }),
@@ -84,6 +100,9 @@ if(!Types.ObjectId.isValid(touserId)){
     return new NextResponse(JSON.stringify({message : 'Invalide touser id' } ) ,{status : 400})
 }
 
+if(byuserId === touserId){
+ return new NextResponse(JSON.stringify({message : 'Thats Really stupid lol' } ) ,{status : 400})
+}
 
 await connect();
 
@@ -148,7 +167,7 @@ try{
 
 const {searchParams} = new URL(request.url);
 const requestId = searchParams.get("requestId");
-
+const loggeduserid = request.headers.get("loggeduserid")
 
 
 if (!requestId) {
@@ -173,6 +192,10 @@ if(!frequest){
     return new NextResponse(JSON.stringify({message:"frequest not found"}) , {status:404})
 }
 
+
+if(frequest.touserid.toString() !== loggeduserid){
+ return new NextResponse('why the fuck u are trying to access another users ' , {status:404})
+}
 
 
 const updatedtouser = await User.findByIdAndUpdate(
@@ -231,6 +254,7 @@ try{
 
 const {searchParams} = new URL(request.url);
 const requestId = searchParams.get('requestId');
+const loggeduserid = request.headers.get("loggeduserid")
 
 if(!requestId || requestId === ""){
 
@@ -240,6 +264,16 @@ if(!requestId || requestId === ""){
 if(!mongoose.Types.ObjectId.isValid(requestId)){
 
     return new NextResponse(JSON.stringify({message:"RequestId isnt valid"}) , {status:400})
+}
+
+const frequest = await Frequest.findById(requestId);
+
+if(!frequest){
+    return new NextResponse(JSON.stringify({message:"Request not found"}) , {status:404})
+}
+
+if(frequest.byuserid.toString() !== loggeduserid){
+ return new NextResponse('why the fuck u are trying to access another users ' , {status:404})
 }
 
 
