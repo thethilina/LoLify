@@ -13,6 +13,8 @@ try{
 
 const {searchParams} = new URL(request.url);
 const userId = searchParams.get('userId');
+const loggeduserid = request.headers.get("loggeduserid")
+
 
 if (!userId) {
       return new NextResponse(
@@ -27,7 +29,9 @@ if(!Types.ObjectId.isValid(userId)){
     return new NextResponse(JSON.stringify({message : 'Invalide user id' } ) ,{status : 400})
 }
 
-
+if(userId !== loggeduserid){
+ return new NextResponse('why the fuck u are trying to access another users ' , {status:403})
+}
 
 const body = await request.json();
 const {fieldToEdit , newValue} = body;
@@ -85,6 +89,9 @@ try {
 
 const {searchParams} = new URL(request.url);
 const userId = searchParams.get("userId");
+const loggeduserid = request.headers.get("loggeduserid")
+
+
 
 if (!userId) {
       return new NextResponse(
@@ -98,6 +105,11 @@ if(!Types.ObjectId.isValid(userId)){
 
     return new NextResponse(JSON.stringify({message : 'Invalide user id' } ) ,{status : 400})
 }
+
+if(userId !== loggeduserid){
+ return new NextResponse('why the fuck u are trying to access another users ' , {status:403})
+}
+
 
 await connect();
 

@@ -4,10 +4,9 @@ import jwt from "jsonwebtoken";
 
 export async function middleware(req: NextRequest) {
 
-console.log("Current time:", Date.now() / 1000);
 
   const token = req.cookies.get("token")?.value;
-  console.log("Token received in middleware:", token);
+
   if (!token) return NextResponse.json({ message: "unauthorized" }, { status: 401 });
 
   try {
