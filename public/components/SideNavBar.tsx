@@ -14,7 +14,7 @@ export default function SideNavBar() {
                 <div className="flex flex-col gap-y-4  border-gray-500 ">
                     <button className="flex items-center gap-x-4 px-6 rounded-2xl py-2 bg-[#0d0d0f] hover:bg-[#27272e] hover:cursor-pointer "><IoHomeOutline size={25} /> Home</button>
                     <button className="flex items-center gap-x-4 px-6 rounded-2xl py-2 bg-[#0d0d0f] hover:bg-[#27272e] hover:cursor-pointer "><LiaUserFriendsSolid size={25} /> Friends</button>
-                    <button className="flex items-center gap-x-4 px-6 rounded-2xl py-2 bg-[#0d0d0f] hover:bg-[#27272e] hover:cursor-pointer"><PiCrown size={25} /> Leader Board</button>
+                    <button className="flex items-center gap-x-4 px-6 rounded-2xl py-2 bg-[#0d0d0f] hover:bg-[#27272e] hover:cursor-pointer"><PiCrown size={25} /> <Link href="/Leaderboard">Leader Board</Link></button>
                     <button className="flex items-center gap-x-4 px-6 rounded-2xl py-2 bg-[#0d0d0f] hover:bg-[#27272e] hover:cursor-pointer"><LuUserRound size={25} />Profile</button>
                     <button className="flex items-center gap-x-4 px-6 rounded-2xl py-2 bg-[#0d0d0f] hover:bg-[#27272e] hover:cursor-pointer"><CiSettings size={25} />Settings</button>
                 </div>
