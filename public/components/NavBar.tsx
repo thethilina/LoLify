@@ -124,7 +124,7 @@ export default function NavBar() {
         {user && <>
           <Link href="/post"><button className=" items-center justify-center gap-x-2  text-gray-300 sm:py-1 sm:px-3  hover:bg-[#1a1a1d] hidden sm:flex rounded-xl hover:cursor-pointer">< IoCreateOutline size={25} /> <h1 className="sm:block hidden">Create</h1></button></Link>
 
-          <button><IoMdNotificationsOutline size={25} /></button></>
+          <button className="lg:hidden"><IoMdNotificationsOutline size={25} /></button></>
         }
 
         {user ?

@@ -55,7 +55,7 @@ export default function Memecardcont() {
 
 
 
-    <div className="flex flex-col w-full items-center   gap-y-5">
+    <div className="flex flex-col w-full items-center    gap-y-5">
 
       {isLoading && <div className="flex flex-col gap-y-4 justify-center text-green-800 items-center"><Image src={loading} alt="loading" width={170} height={170} /><h1 className="text-xl font-semibold">Loading</h1></div>}
 

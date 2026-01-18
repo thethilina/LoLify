@@ -31,3 +31,11 @@ body {
   color: var(--foreground);
   font-family: 'Gothic A1', sans-serif;
 }
+
+.scrollbar-soft::-webkit-scrollbar-thumb {
+  background-color: rgba(255,255,255,0.12);
+}
+
+.scrollbar-soft::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255,255,255,0.25);
+}

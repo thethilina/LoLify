@@ -5,7 +5,7 @@ import NavBar from "../public/components/NavBar";
 import SideNavBar from "../public/components/SideNavBar";
 import NextTopLoader from "nextjs-toploader";
 import { UserProvider } from "@/public/UserContext";
-
+import RightNavBar from "@/public/components/RightBar";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -25,14 +25,31 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
      <UserProvider>     <NavBar/>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >       <SideNavBar/>
-              <NextTopLoader color="#246d3c" showSpinner={false} />
+ <body
+  className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+>
+  <NextTopLoader color="#246d3c" showSpinner={false} />
 
-       
-   <div className="sm:ml-70 mt-20 p-3">          {children} </div>
-      </body></UserProvider>
+  <NavBar />
+
+  <div className="grid grid-cols-[260px_1fr_320px] mt-16 min-h-screen">
+  
+    <aside className="hidden sm:block border-r border-gray-500 sticky top-16 h-[calc(100vh-4rem)]">
+      <SideNavBar />
+    </aside>
+
+
+    <main className="px-4 py-3">
+      {children}
+    </main>
+
+
+    <aside className="hidden lg:block border-l border-gray-500 sticky top-16 h-[calc(100vh-4rem)]">
+      <RightNavBar />
+    </aside>
+  </div>
+</body>
+</UserProvider>
     </html>
   );
 }

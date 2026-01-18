@@ -16,8 +16,7 @@ function MemeCard({
   meme,
   isOpen,
   removememe,
-}: {
-  meme: any;
+}: { meme: any;
   isOpen: boolean;
   removememe: any;
 }) {
