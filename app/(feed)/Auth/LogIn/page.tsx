@@ -73,7 +73,7 @@ export default function Page() {
       const data = await UserResponse.json();
 
       setUser(data.user);
-
+      router.refresh();
       router.push("/")
 
       loader.done()

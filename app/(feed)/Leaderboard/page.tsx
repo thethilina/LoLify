@@ -3,8 +3,8 @@
 import Image from "next/image"
 import { useEffect, useState } from "react"
 
-import leaderboard from "../../public/Images/leaderboard.png"
-import loading from "../../public/Images/loading2.gif"
+import leaderboard from "../../../public/Images/leaderboard.png"
+import loading from "../../../public/Images/loading2.gif"
 
 function Page() {
   const [top3, setTop3] = useState<any[]>([])

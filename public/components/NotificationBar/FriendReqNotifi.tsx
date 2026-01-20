@@ -6,7 +6,7 @@ function FriendReqNotifi({ notification }: { notification: any;  }) {
 
 
 
-
+  
 
   const [viewed, setViewed] = useState(
     notification.status === "viewed"

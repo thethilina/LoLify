@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import MemeCard from '@/public/components/Feed/MemeCard';
 import { useParams } from "next/navigation";
 import Comment from '@/public/components/Feed/comment';
-import loading from "../../../public/Images/loading2.gif"
+import loading from "../../../../public/Images/loading2.gif"
 import Image from 'next/image';
 function page({ params }: any) {
 

@@ -224,7 +224,10 @@ function MemeCard({
           <div className="flex items-center gap-x-3">
             {memeuser === null ? (
               <div className="w-8 h-8 bg-gray-500 rounded-full" />
-            ) : (
+            ) : (     <Link
+                href={`/profile/${meme.userid}`}
+                className=" flex  items-center gap-x-1 hover:cursor-pointer "
+              >
               <Image
                 src={memeuser?.avatar}
                 alt="useravatar"
@@ -232,11 +235,16 @@ function MemeCard({
                 height={30}
                 className="rounded-full border w-8 h-8 object-cover border-gray-500"
               />
+              </Link>
             )}
             {memeuser === null ? (
               <div className="w-15 h-2 rounded-lg bg-gray-500" />
-            ) : (
+            ) : (   <Link
+                href={`/profile/${meme.userid}`}
+                className=" flex  items-center gap-x-1 hover:cursor-pointer "
+              >
               <h1>{memeuser?.username}</h1>
+              </Link>
             )}
           </div>
           <div className="flex gap-x-2 items-center">
