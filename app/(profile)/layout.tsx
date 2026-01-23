@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "../../app/globals.css";
-import NavBar from "../../public/components/NavBar";
-import SideNavBar from "../../public/components/SideNavBar";
+import "../globals.css";
+import NavBar from "@/public/components/NavBar";
+import SideNavBar from "@/public/components/SideNavBar";
 import RightNavBar from "@/public/components/RightBar";
 import NextTopLoader from "nextjs-toploader";
 import { UserProvider } from "@/public/UserContext";
@@ -31,7 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <NavBar />
 
 
-          <div className="flex mt-16 min-h-screen">
+          <div className="flex  min-h-screen">
           
             <aside className="hidden mr-2 sm:block w-[260px] border-r border-gray-500 sticky top-16 h-[calc(100vh-4rem)]">
               <SideNavBar />

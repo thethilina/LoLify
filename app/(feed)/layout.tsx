@@ -30,7 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <NextTopLoader color="#246d3c" showSpinner={false} />
           <NavBar />
 
-          <div className="flex mt-16 min-h-screen">
+          <div className="flex min-h-screen">
             {/* Left Sidebar */}
             <aside className="hidden sm:block w-[260px] border-r border-gray-500 sticky top-16 h-[calc(100vh-4rem)]">
               <SideNavBar />

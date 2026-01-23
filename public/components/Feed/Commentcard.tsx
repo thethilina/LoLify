@@ -5,7 +5,7 @@ import Image from "next/image";
 import { MdDeleteOutline } from "react-icons/md";
 import { useContext } from "react";
 import { UserContext } from "@/public/UserContext";
-
+import Link from "next/link";
 function Commentcard({ comment, onDelete }: { comment: any; onDelete: any }) {
   const [commenteduser, setcommented] = useState<any>(null);
   const { user } = useContext(UserContext);
@@ -28,7 +28,10 @@ function Commentcard({ comment, onDelete }: { comment: any; onDelete: any }) {
         <div className="flex items-center gap-x-3">
           {commenteduser === null ? (
             <div className="w-8 h-8 rounded-full bg-gray-500"></div>
-          ) : (
+          ) : (  <Link
+                href={`/profile/${comment.userid}`}
+                className=" flex  items-center gap-x-1 hover:cursor-pointer "
+              >
             <Image
               src={commenteduser?.avatar}
               alt="avatar"
@@ -36,11 +39,15 @@ function Commentcard({ comment, onDelete }: { comment: any; onDelete: any }) {
               height={35}
               className="rounded-full w-8 h-8 object-cover"
             />
+            </Link>
           )}
           {commenteduser === null ? (
             <div className="w-20 h-2 rounded-lg bg-gray-500"></div>
-          ) : (
-            <h1 className="">{commenteduser?.username}</h1>
+          ) : (<Link
+                href={`/profile/${comment.userid}`}
+                className=" flex  items-center gap-x-1 hover:cursor-pointer "
+              >
+            <h1 className="">{commenteduser?.username}</h1></Link>
           )}
         </div>
         <div className="flex gap-x-2 items-center">

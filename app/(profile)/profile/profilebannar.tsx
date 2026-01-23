@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Profilebannar({ userData , user }: any) {
+function Profilebannar({ userData , user , setcurrentpage }: any) {
   return (
     <div className="relative h-[20vh] lg:h-[25vh]">
       
@@ -34,9 +34,9 @@ function Profilebannar({ userData , user }: any) {
        
        <div className='flex px-10 py-10 gap-x-5 items-center'>
 
-        <button className='bg-[#131316] hover:bg-[#2a2a2d] hover:cursor-pointer py-2 px-4 rounded-lg border text-lg'>Memes</button>
-        <button className='bg-[#131316] hover:bg-[#2a2a2d] hover:cursor-pointer py-2 px-4 rounded-lg border text-lg'>Battle History</button>
-        {user && user._id === userData._id && <button className='bg-[#131316] hover:bg-[#2a2a2d] hover:cursor-pointer py-2 px-4 rounded-lg border text-lg'>Settings</button>}
+        <button  onClick={() => setcurrentpage("memes")}  className='bg-[#131316] hover:bg-[#2a2a2d] hover:cursor-pointer py-1 px-2 rounded-lg border text-lg'>Memes</button>
+        <button onClick={() => setcurrentpage("battlehistory")} className='bg-[#131316] hover:bg-[#2a2a2d] hover:cursor-pointer py-1 px-2 rounded-lg border text-lg'>Battle History</button>
+        {user && user._id === userData._id && <button  onClick={()=>{setcurrentpage("settings")}}     className='bg-[#131316] hover:bg-[#2a2a2d] hover:cursor-pointer py-1 px-2 rounded-lg border text-lg'>Settings</button>}
        </div>
 
       </div>

@@ -23,12 +23,12 @@ export default function NavBar() {
 
   const menuRef = useRef<HTMLDivElement>(null);
 
-  // Close dropdown on user change
+  
   useEffect(() => {
     setOpen(false);
   }, [user]);
 
-  // Close dropdown on outside click
+  
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
@@ -59,6 +59,7 @@ export default function NavBar() {
       });
 
       setUser(null);
+      router.refresh();
       router.push("/");
       loader.done();
     } catch (e: any) {
@@ -68,7 +69,9 @@ export default function NavBar() {
   };
 
   return (
-    <nav className="flex justify-between px-4 sm:px-10 py-3 items-center fixed top-0 z-50 w-full border-b border-gray-500 bg-[#0F0F11]">
+   <nav className="flex justify-between px-4 sm:px-10 py-3 items-center 
+sticky top-0 z-50 w-full border-b border-gray-500 bg-[#0F0F11]">
+
       {/* Logo */}
       <Link href="/">
         <div className="flex items-center gap-x-4">

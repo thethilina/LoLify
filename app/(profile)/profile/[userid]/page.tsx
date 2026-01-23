@@ -3,6 +3,13 @@ import React, { useState, useEffect, use } from "react";
 import { UserContext } from "@/public/UserContext";
 import { useContext } from "react";
 import Profilebannar from "../profilebannar";
+import Profilememes from "../profilememes";
+import Battlehistory from "../battlehistory";
+import Settings from "../settings";
+
+
+
+
 
 
 function Page({ params }: { params: Promise<{ userid: string }> }) {
@@ -11,7 +18,7 @@ function Page({ params }: { params: Promise<{ userid: string }> }) {
   const { userid } = use(params); 
   const [userData, setUserData] = useState<any>(null);
   const { user, setUser } = useContext(UserContext);
-
+  const [currentpage, setCurrentpage] = useState<string>("memes");
 
 
   useEffect(() => {
@@ -38,11 +45,18 @@ function Page({ params }: { params: Promise<{ userid: string }> }) {
 
 
         <div>
-        <Profilebannar userData={userData} user={user} /> 
+        <Profilebannar userData={userData} user={user} setcurrentpage={setCurrentpage} /> 
+        <div className="p-10">
+          {currentpage === "memes" && <Profilememes userid={userid} />}
+          {currentpage === "battlehistory" && <Battlehistory userid={userid} />}
+          {currentpage === "settings" && <Settings userid={userid} user={user} setuser={setUser} />}
+        
+
+
+
         </div>
-
-
-
+        </div>
+      
 
 
       ) : (
