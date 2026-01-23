@@ -143,7 +143,6 @@ function Settings({ userid }: any) {
     }
   };
 
-  /* ---------------- UI ---------------- */
 
   return (
     <div className="space-y-10 lg:w-1/2">
@@ -151,7 +150,6 @@ function Settings({ userid }: any) {
       <p>Signed in as {(user as any)?.email}</p>
 
       <div className="space-y-10">
-        {/* Username */}
         <div
           onClick={() => setEditUsernameMode(true)}
           className="flex justify-between items-center hover:bg-[#222121] px-2 py-1 rounded-lg cursor-pointer"
@@ -160,7 +158,6 @@ function Settings({ userid }: any) {
           <h2>{(user as any)?.username} ✎</h2>
         </div>
 
-        {/* Avatar */}
         <div className="space-y-4">
           <h2 className="text-lg">Your Avatar</h2>
           <img
@@ -173,7 +170,6 @@ function Settings({ userid }: any) {
           />
         </div>
 
-        {/* Cover */}
         <div className="space-y-4">
           <h2 className="text-lg">Your Cover Photo</h2>
           <img
@@ -186,7 +182,6 @@ function Settings({ userid }: any) {
           />
         </div>
 
-        {/* Logout */}
         <h1
           onClick={handleLogout}
           className="text-red-900 font-semibold text-lg cursor-pointer"
@@ -195,7 +190,6 @@ function Settings({ userid }: any) {
         </h1>
       </div>
 
-      {/* ---------------- Username Modal ---------------- */}
       {editUsernameMode && (
         <div
           onClick={() => setEditUsernameMode(false)}
@@ -222,7 +216,6 @@ function Settings({ userid }: any) {
         </div>
       )}
 
-      {/* ---------------- Avatar Modal ---------------- */}
       {editAvatarMode && (
         <div
           onClick={() => setEditAvatarMode(false)}
@@ -265,7 +258,6 @@ function Settings({ userid }: any) {
         </div>
       )}
 
-      {/* ---------------- Cover Modal ---------------- */}
       {editCoverMode && (
         <div
           onClick={() => setEditCoverMode(false)}
