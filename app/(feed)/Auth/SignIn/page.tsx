@@ -2,14 +2,10 @@
 import { FaCamera } from "react-icons/fa";
 import { useState } from "react";
 import Link from "next/link";
-import Signup from "../../../public/Images/signup.png"
-import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useTopLoader } from 'nextjs-toploader';
-
+import { useTopLoader } from "nextjs-toploader";
 
 export default function SignIn() {
-
   const loader = useTopLoader();
   const [message, setMessage] = useState<string>("");
   const [profilepic, setProfilepic] = useState<File | null>(null);
@@ -18,106 +14,80 @@ export default function SignIn() {
   const [email, setEmail] = useState("");
   const [age, setAge] = useState(0);
   const [password, setPassword] = useState("");
-
   const router = useRouter();
 
   const handleProfileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      setProfilepic(e.target.files[0]);
-    }
+    if (e.target.files && e.target.files.length > 0) setProfilepic(e.target.files[0]);
   };
 
   const handleCoverChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      setCoverphoto(e.target.files[0]);
-    }
+    if (e.target.files && e.target.files.length > 0) setCoverphoto(e.target.files[0]);
   };
 
+  const setmessage = (msg: string) => {
+    setMessage(msg);
+    setTimeout(() => setMessage(""), 5000);
+  };
 
   const handleSubmit = async () => {
     try {
-      loader.start()
-
+      loader.start();
       const maxSize = 5 * 1024 * 1024;
 
       if (!profilepic || !coverphoto || !username || !email || !age || !password) {
         setmessage("Please fill in all fields");
-        loader.done()
+        loader.done();
         return;
       }
 
-
-
       if (profilepic.size > maxSize) {
-
         setmessage("Profile picture can't be larger than 5MB");
-        loader.done()
-        return
+        loader.done();
+        return;
       }
-
 
       if (coverphoto.size > maxSize) {
-
         setmessage("Cover picture can't be larger than 5MB");
-        loader.done()
-        return
-
-
+        loader.done();
+        return;
       }
 
-
-      const emialres = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/checkemail?email=${email}`)
-
-      if (!emialres.ok) {
-
-        setmessage("Email is already used")
-        loader.done()
-        return
-
+      const emailRes = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/checkemail?email=${email}`);
+      if (!emailRes.ok) {
+        setmessage("Email is already used");
+        loader.done();
+        return;
       }
 
-      const userres = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/checkusername?username=${username}`)
-
-      if (!userres.ok) {
-
-        setmessage("User name is already taken")
-        loader.done()
-        return
-
+      const userRes = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/checkusername?username=${username}`);
+      if (!userRes.ok) {
+        setmessage("Username is already taken");
+        loader.done();
+        return;
       }
 
+      const uploadFile = async (file: File) => {
+        const formData = new FormData();
+        formData.append("file", file);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/uploadphotos`, {
+          method: "POST",
+          body: formData,
+        });
+        return await res.json();
+      };
 
-
-      const pp = new FormData();
-      pp.append("file", profilepic);
-      const profilepicResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/uploadphotos`, {
-        method: "POST",
-        body: pp
-      });
-
-      const profilepicUrl = await profilepicResponse.json();
-
-
+      const profilepicUrl = await uploadFile(profilepic);
       if (!profilepicUrl.secure_url) {
-        setmessage("Error uploading profile picture")
-        loader.done()
-        return
+        setmessage("Error uploading profile picture");
+        loader.done();
+        return;
       }
 
-
-
-      const cp = new FormData();
-      cp.append("file", coverphoto);
-      const coverphotoResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/uploadphotos`, {
-        method: "POST",
-        body: cp
-      });
-      const coverphotoUrl = await coverphotoResponse.json();
-
+      const coverphotoUrl = await uploadFile(coverphoto);
       if (!coverphotoUrl.secure_url) {
-        setmessage("Error uploading cover picture")
-        loader.done()
-        return
+        setmessage("Error uploading cover picture");
+        loader.done();
+        return;
       }
 
       const body = {
@@ -127,130 +97,127 @@ export default function SignIn() {
         email,
         birthdate: age.toString(),
         password,
-        orbs: 0
+        orbs: 0,
       };
 
-
-      const newuserResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/register`, {
+      const newUserRes = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/register`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(body)
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
       });
-      const newuserData = await newuserResponse.json();
-      console.log(newuserData);
+
+      const newUserData = await newUserRes.json();
+      console.log(newUserData);
 
       router.push("/Auth/LogIn");
-      loader.done()
-
+      loader.done();
     } catch (e: any) {
-      setmessage("Error during registration")
+      setmessage("Error during registration");
       console.error("Error during registration:", e.message);
-      loader.done()
+      loader.done();
     }
   };
 
-
-
-
-  const setmessage = (msg: string) => {
-
-    setMessage(msg);
-    setTimeout(() => {
-      setMessage("");
-    }, 5000);
-
-
-  }
-
-
-
-
   return (
+    <div className="flex flex-col items-center justify-center w-full min-h-screen gap-8 px-4 text-lg text-[#B9B9CE]">
+      <h1 className="text-2xl font-semibold text-[#8f96be] text-center">Welcome to LOLify!</h1>
 
+      <form className="flex flex-col gap-6 w-full max-w-lg">
 
-    <div className=" items-center w-full h-full flex-col justify-center flex   gap-y-10  text-lg text-[#B9B9CE]     ">
-
-      <h1 className="text-2xl font-semibold text-[#8f96be] ">Welcome to LOLify!</h1>
-
-      <form className="flex flex-col justify-around  gap-y-10" >
-
-
-
-
-        <div className="flex items-center gap-x-5"><div style={{
-          backgroundImage: profilepic ? `url(${URL.createObjectURL(profilepic)})` : "none",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }} className="w-16 border-3 border-gray-600 h-16 bg-gray-500 rounded-full   flex justify-end items-end ">
-          <input onChange={handleProfileChange} type="file" accept=".jpg,.jpeg,.png" className="absolute  opacity-0 h-10 w-10 hover:cursor-pointer " />
-          <FaCamera className="bg-gray-800 p-2 h-8 w-8 hover:bg-gray-900 hover:cursor-pointer border-gray-400 rounded-full hover:border hover:border-gray-600" />
-        </div>
-          <h1>Set Your Avatar</h1>
-        </div>
-
-
-
-        {/* profile pic and cover photo */}
-        <div className="flex flex-col gap-y-2">
-
-          <h1>Set Your Cover Photo</h1>
-          <div className="flex justify-center items-center ">
-            <div className="h-50 w-150  bg-gray-600 flex  justify-between  border-2 border-gray-400 rounded-lg " style={{
-              backgroundImage: coverphoto ? `url(${URL.createObjectURL(coverphoto)})` : "none",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}>
-
-              <div className="bg-gray-800 p-3 h-10 w-10 m-2 border-gray-400  flex items-center hover:cursor-pointer hover:border hover:border-gray-400 hover:bg-gray-900   rounded-full">
-                < FaCamera />
-                <input onChange={handleCoverChange} type="file" accept=".jpg,.jpeg,.png" className="absolute  opacity-0 h-10 w-10 hover:cursor-pointer " />
-              </div>
-            </div>
+        {/* Profile Picture */}
+        <div className="flex flex-col sm:flex-row items-center gap-4">
+          <div className="relative w-20 aspect-square rounded-full flex-shrink-0 bg-gray-500 flex justify-end items-end overflow-hidden">
+            {profilepic && (
+              <img
+                src={URL.createObjectURL(profilepic)}
+                alt="Profile Preview"
+                className="w-full h-full object-cover"
+              />
+            )}
+            <input
+              onChange={handleProfileChange}
+              type="file"
+              accept=".jpg,.jpeg,.png"
+              className="absolute inset-0 opacity-0 cursor-pointer"
+            />
+            <FaCamera className="absolute bottom-1 right-1 bg-gray-800 p-2 rounded-full hover:bg-gray-900 border border-gray-400" />
           </div>
-
+          <span className="text-center sm:text-left flex-1">Set Your Avatar</span>
         </div>
 
-
-        {/*items*/}
-
-        <div className="flex gap-x-4 justify-between">
-          <h1 className="flex flex-col gap-y-2      items-start      gap-x-5 justify-between">User Name :
-            <input value={username} onChange={(e) => { setUsername(e.target.value) }} type="text" placeholder="User Name" className="rounded-xl w-80  py-1 px-4  bg-[#333333] focus:border-[#878b87] focus:outline-none " /></h1>
-          <h1 className="flex flex-col  gap-y-2      items-start      gap-x-5 justify-between">Emaill :
-            <input value={email} onChange={(e) => { setEmail(e.target.value) }} type="email" placeholder="Email" className="rounded-xl py-1  w-80 px-4 bg-[#333333]  focus:border-[#878b87] focus:outline-none" /></h1>
+        {/* Cover Photo */}
+        <div className="flex flex-col gap-2">
+          <span>Set Your Cover Photo</span>
+          <div className="relative w-full max-w-lg aspect-[16/9] rounded-lg bg-gray-600 flex justify-end items-end overflow-hidden">
+            {coverphoto && (
+              <img
+                src={URL.createObjectURL(coverphoto)}
+                alt="Cover Preview"
+                className="w-full h-full object-cover"
+              />
+            )}
+            <input
+              onChange={handleCoverChange}
+              type="file"
+              accept=".jpg,.jpeg,.png"
+              className="absolute inset-0 opacity-0 cursor-pointer"
+            />
+            <FaCamera className="absolute bottom-2 right-2 bg-gray-800 p-2 rounded-full hover:bg-gray-900 border border-gray-400" />
+          </div>
         </div>
 
-
-
-
-        <div className="flex gap-x-4 justify-between">
-
-
-          <h1 className="flex  flex-col  gap-y-2    items-start     gap-x-5 justify-between">Enter Your Age :
-            <input value={age} onChange={(e) => { setAge(parseInt(e.target.value)) }} type="number" placeholder="Age" className="rounded-xl py-1 w-80 px-4 bg-[#333333] focus:border-[#878b87] focus:outline-none" /></h1>
-          <h1 className="flex  flex-col  gap-y-2    items-start     gap-x-5 justify-between">Create Your Password :
-            <input value={password} onChange={(e) => { setPassword(e.target.value) }} type="password" placeholder="Password" className="rounded-xl w-80 py-1 px-4 bg-[#333333] focus:border-[#878b87] focus:outline-none" /></h1>
-
+        {/* Inputs */}
+        <div className="flex flex-col sm:flex-row gap-4">
+          <input
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            type="text"
+            placeholder="Username"
+            className="flex-1 rounded-xl py-2 px-4 bg-[#333333] focus:outline-none focus:border-[#878b87]"
+          />
+          <input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            type="email"
+            placeholder="Email"
+            className="flex-1 rounded-xl py-2 px-4 bg-[#333333] focus:outline-none focus:border-[#878b87]"
+          />
         </div>
 
-
-        <div className="flex justify-between items-center mt-5">
-          <h1><Link href="/Auth/LogIn"> Already a member? LogIn </Link></h1>
-          <button type="button" onClick={handleSubmit} className="font-medium bg-[#4b4679]   px-7 hover:cursor-pointer hover:bg-[#6d62cf] py-1 rounded-xl ">Sign Up</button>
+        <div className="flex flex-col sm:flex-row gap-4">
+          <input
+            value={age}
+            onChange={(e) => setAge(parseInt(e.target.value))}
+            type="number"
+            placeholder="Age"
+            className="flex-1 rounded-xl py-2 px-4 bg-[#333333] focus:outline-none focus:border-[#878b87]"
+          />
+          <input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+            placeholder="Password"
+            className="flex-1 rounded-xl py-2 px-4 bg-[#333333] focus:outline-none focus:border-[#878b87]"
+          />
         </div>
 
-
+        {/* Footer */}
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-2 mt-4">
+          <Link href="/Auth/LogIn" className=" text-[#A7A7D4] hover:underline">
+            Already a member? Log In
+          </Link>
+          <button
+            type="button"
+            onClick={handleSubmit}
+            className="w-full sm:w-auto bg-[#4b4679] hover:bg-[#6d62cf] py-2 px-6 rounded-xl text-white font-medium"
+          >
+            Sign Up
+          </button>
+        </div>
 
       </form>
-      {message && <div className="text-red-500 font-medium">{message}</div>}
+
+      {message && <div className="text-red-500 font-medium text-center">{message}</div>}
     </div>
-
-
-  )
-
-
-
-
+  );
 }

@@ -6,11 +6,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTopLoader } from "nextjs-toploader";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 import Logo from "../Images/Logo.png";
 import { IoIosSearch } from "react-icons/io";
 import { IoCreateOutline } from "react-icons/io5";
 import { IoMdNotificationsOutline } from "react-icons/io";
+import SideNavBar from "./SideNavBar";
+import { IoCloseSharp } from "react-icons/io5";
+import MobileSideNav from "./MobileSideNav";
 
 export default function NavBar() {
   const { user, setUser } = useContext(UserContext);
@@ -20,7 +24,7 @@ export default function NavBar() {
 
   const [isOpened, setOpen] = useState(false);
   const [searchtext, setsearchtext] = useState("");
-
+  const [isSideNavOpen, setIsSideNavOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
   
@@ -72,18 +76,22 @@ export default function NavBar() {
    <nav className="flex justify-between px-4 sm:px-10 py-3 items-center 
 sticky top-0 z-50 w-full border-b border-gray-500 bg-[#0F0F11]">
 
+
       {/* Logo */}
-      <Link href="/">
+     <div className="flex items-center justify-center gap-x-3">
+       {!isSideNavOpen? <GiHamburgerMenu className="z-100 sm:hidden" onClick={ ()=>{setIsSideNavOpen(!isSideNavOpen)}} /> : <IoCloseSharp className="z-100 sm:hidden" onClick={ ()=>{setIsSideNavOpen(!isSideNavOpen)}} />}
+        <Link href="/">
         <div className="flex items-center gap-x-4">
           <Image className="hidden sm:block w-8" src={Logo} alt="Logo" />
           <h1 className="text-lg sm:text-xl font-bold text-[#246d3c]">
             LOLify
           </h1>
+          
         </div>
       </Link>
-
+</div>
       {/* Search */}
-      <form onSubmit={handlesearch} className="flex items-center mx-3">
+      <form onSubmit={handlesearch} className=" hidden sm:flex items-center mx-3">
         <input
           onChange={(e) => setsearchtext(e.target.value)}
           className="bg-[#2b2b2b] w-full sm:w-100 py-1 px-2 sm:py-2 sm:pl-10 rounded-l-full focus:outline-none"
@@ -151,6 +159,9 @@ sticky top-0 z-50 w-full border-b border-gray-500 bg-[#0F0F11]">
           </Link>
         )}
       </div>
+
+      {isSideNavOpen && <div className="fixed inset-0  z-50 "> <MobileSideNav setclose={() => setIsSideNavOpen(false)} /> </div>}
+
     </nav>
   );
 }
