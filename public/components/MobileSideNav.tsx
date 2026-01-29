@@ -28,7 +28,7 @@ function MobileSideNav({setclose}: any) {
         </Link>
 
         <Link
-          href="/friends"
+          href="/Friends"
           className="flex items-center gap-x-4 px-6 py-2 rounded-2xl bg-[#0d0d0f] hover:bg-[#27272e]"
           onClick={setclose}
         >

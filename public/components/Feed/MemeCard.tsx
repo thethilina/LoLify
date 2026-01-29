@@ -218,7 +218,7 @@ function MemeCard({
 
   return (
     <div className="sm:w-200 w-full ">
-      <div className="border border-gray-500 rounded-lg p-5   bg-[#17171b]  gap-y-3 flex flex-col">
+      <div className="border border-gray-500 rounded-lg p-5   dark:bg-[#17171b] bg-[#e6e6f5]   gap-y-3 flex flex-col">
         {/* upper meme section */}
         <div className="flex justify-between items-center px-2 ">
           <div className="flex items-center gap-x-3">

@@ -74,7 +74,7 @@ export default function NavBar() {
 
   return (
    <nav className="flex justify-between px-4 sm:px-10 py-3 items-center 
-sticky top-0 z-50 w-full border-b border-gray-500 bg-[#0F0F11]">
+sticky top-0 z-50 w-full border-b border-gray-500 dark:bg-[#0F0F11] bg-[#ece4e4] ">
 
 
       {/* Logo */}
@@ -94,11 +94,11 @@ sticky top-0 z-50 w-full border-b border-gray-500 bg-[#0F0F11]">
       <form onSubmit={handlesearch} className=" hidden sm:flex items-center mx-3">
         <input
           onChange={(e) => setsearchtext(e.target.value)}
-          className="bg-[#2b2b2b] w-full sm:w-100 py-1 px-2 sm:py-2 sm:pl-10 rounded-l-full focus:outline-none"
+          className="dark:bg-[#2b2b2b]  bg-[#c4bcbc]    w-full sm:w-100 py-1 px-2 sm:py-2 sm:pl-10 rounded-l-full focus:outline-none"
           type="text"
           placeholder="Search Lolify"
         />
-        <button className="bg-[#3b3b3b] py-1.5 sm:py-2.5 px-2 rounded-r-full">
+        <button className="dark:bg-[#3b3b3b] bg-[#c4bcbc]  py-1.5 sm:py-2.5 px-2 rounded-r-full">
           <IoIosSearch size={20} />
         </button>
       </form>
